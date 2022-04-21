@@ -54,27 +54,27 @@ resource "aws_default_route_table" "main-rtb" {
 }
 
 resource "aws_security_group" "myapp-sg" {
-  Name = "myapp-sg"
+  name = "myapp-sg"
   vpc_id = aws_vpc.myapp-vpc.id
 
   ingress {       # incomming traffic
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_block = [var.my_ip_for_ssh]
+    cidr_blocks = [var.my_ip_for_ssh]
   }
   ingress {       # incomming traffic
     from_port = 8080
     to_port = 8080
     protocol = "tcp"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {        # Outgoing traffic
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
     prefix_list_ids = []
   }
 
